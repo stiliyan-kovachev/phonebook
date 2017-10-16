@@ -24,8 +24,47 @@ public class DataBase extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
 
-    public DataBase(Activity context ) {
+    public DataBase( Activity context ) {
         super( context, database_name, null, table_version );
+    }
+
+    public void addContact( ContactVO contact ) {
+        open();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put( key_name, contact.name );
+        contentValues.put( key_email, contact.email );
+        contentValues.put( key_country, contact.country );
+        contentValues.put( key_code, contact.code );
+        contentValues.put( key_phone, contact.phone );
+        contentValues.put( key_gender, contact.gender );
+
+        db.insert( table_name, null, contentValues );
+        close();
+    }
+
+    public Cursor getAllContacts()
+    {
+        open();
+
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " + table_name, null );
+
+        close();
+
+        return  cursor;
+
+    }
+
+    public Cursor getContactById( int id )
+    {
+        open();
+
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " + table_name + " " + "where " + "_id" + " = '" + id + "'", null );
+
+        close();
+
+        return  cursor;
+
     }
 
     @Override
@@ -41,7 +80,7 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade( SQLiteDatabase sqLiteDatabase, int i, int i1 ) {
 
     }
 
