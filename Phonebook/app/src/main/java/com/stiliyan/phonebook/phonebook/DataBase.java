@@ -59,7 +59,7 @@ public class DataBase extends SQLiteOpenHelper {
     {
         open();
 
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " + table_name + " " + "where " + "_id" + " = '" + id + "'", null );
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " + table_name + " " + "where " + key_id + " = '" + id + "'", null );
 
         close();
 
