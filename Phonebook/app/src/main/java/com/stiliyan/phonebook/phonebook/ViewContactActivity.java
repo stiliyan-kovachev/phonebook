@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.stiliyan.phonebook.phonebook.data.ContactVO;
 import com.stiliyan.phonebook.phonebook.data.DataBase;
 import com.stiliyan.phonebook.phonebook.data.DataController;
+import com.stiliyan.phonebook.phonebook.utils.Consts;
 
 import org.w3c.dom.Text;
 
@@ -32,7 +33,7 @@ public class ViewContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_contact);
 
         Intent intent = getIntent();
-        final int id = intent.getIntExtra( DataBase.key_id, -1 );
+        final int id = intent.getIntExtra( Consts.ID, -1 );
 
         nameTV = ( TextView ) findViewById( R.id.name );
         countryTV = ( TextView ) findViewById( R.id.country );

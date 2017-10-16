@@ -22,6 +22,7 @@ import com.stiliyan.phonebook.phonebook.data.ContactVO;
 import com.stiliyan.phonebook.phonebook.data.CountryVO;
 import com.stiliyan.phonebook.phonebook.data.DataBase;
 import com.stiliyan.phonebook.phonebook.data.DataController;
+import com.stiliyan.phonebook.phonebook.utils.Consts;
 import com.stiliyan.phonebook.phonebook.utils.Validation;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class EditContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact);
 
         Intent intent = getIntent();
-        final int id = intent.getIntExtra(DataBase.key_id, -1);
+        final int id = intent.getIntExtra(Consts.ID, -1);
 
         nameTV = (TextView) findViewById(R.id.name);
         phoneTV = (TextView) findViewById(R.id.phone);

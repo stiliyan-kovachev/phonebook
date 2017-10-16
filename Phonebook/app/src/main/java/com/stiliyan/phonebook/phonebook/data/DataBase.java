@@ -15,7 +15,6 @@ public class DataBase extends SQLiteOpenHelper {
 
     private static final int table_version    = 1;
 
-    public  static  final String key_id      = "id";
     public  static  final String key_contact_id  = "contact_id";
     public  static  final String key_name    = "name";
     public  static  final String key_email   = "email";

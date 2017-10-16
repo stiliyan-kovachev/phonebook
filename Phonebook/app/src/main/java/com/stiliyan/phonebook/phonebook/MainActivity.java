@@ -17,6 +17,7 @@ import com.stiliyan.phonebook.phonebook.data.ContactVO;
 import com.stiliyan.phonebook.phonebook.data.CountryVO;
 import com.stiliyan.phonebook.phonebook.data.DataBase;
 import com.stiliyan.phonebook.phonebook.data.DataController;
+import com.stiliyan.phonebook.phonebook.utils.Consts;
 import com.stiliyan.phonebook.phonebook.utils.RequestCodes;
 
 import java.util.List;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 ContactVO model = ( ContactVO ) contactList.getItemAtPosition( i );
 
                 Intent intent = new Intent( MainActivity.this, ViewContactActivity.class );
-                intent.putExtra( DataBase.key_id, model.id );
+                intent.putExtra( Consts.ID, model.id );
                 startActivityForResult( intent, RequestCodes.CREATE_EDIT_CONTACT_REQUEST_CODE );
             }
         });
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         if( item == 0 )
                         {
                             Intent intent = new Intent( MainActivity.this, EditContactActivity.class );
-                            intent.putExtra( DataBase.key_id, model.id );
+                            intent.putExtra( Consts.ID, model.id );
                             startActivityForResult( intent, RequestCodes.CREATE_EDIT_CONTACT_REQUEST_CODE );
                         }
                         else
