@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemLongClick( AdapterView<?> arg0, View v,
                                           final int i, long l ) {
 
-                final CharSequence[] items = { "Edit", "Delete" };
+                final CharSequence[] items = { getResources().getString( R.string.edit ), getResources().getString( R.string.delete ) };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder( MainActivity.this );
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         ContactVO model = ( ContactVO ) contactList.getItemAtPosition( i );
                         if( item == 0 )
                         {
-                            Intent intent = new Intent( MainActivity.this, AddContactActivity.class );
+                            Intent intent = new Intent( MainActivity.this, EditContactActivity.class );
                             intent.putExtra( DataBase.key_id, model.id );
                             startActivityForResult( intent, RequestCodes.CREATE_EDIT_CONTACT_REQUEST_CODE );
                         }

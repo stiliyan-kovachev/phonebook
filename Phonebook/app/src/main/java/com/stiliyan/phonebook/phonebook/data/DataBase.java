@@ -39,11 +39,19 @@ public class DataBase extends SQLiteOpenHelper {
         close();
     }
 
+    public void updateContact( int id, ContentValues contact ) {
+        open();
+
+        db.update( contact_table_name, contact, key_contact_id +  " = '" + id + "'", null );
+
+        close();
+    }
+
     public Cursor getAllContacts()
     {
         open();
 
-        Cursor cursor =  db.query(contact_table_name, new String[]{ key_contact_id, key_name, key_phone },null, null, null, null, null );
+        Cursor cursor =  db.query( contact_table_name, new String[]{ key_contact_id, key_name, key_phone },null, null, null, null, null );
 
 //        close();
 

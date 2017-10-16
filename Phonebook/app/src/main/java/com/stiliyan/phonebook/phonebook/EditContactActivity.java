@@ -26,9 +26,8 @@ import com.stiliyan.phonebook.phonebook.utils.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
-public class AddContactActivity extends AppCompatActivity {
+public class EditContactActivity extends AppCompatActivity {
 
     private TextView nameTV;
     private TextView phoneTV;
@@ -39,11 +38,15 @@ public class AddContactActivity extends AppCompatActivity {
     private Button confirmBtn;
 
     List<CountryVO> countries;
+    private ContactVO contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
+
+        Intent intent = getIntent();
+        final int id = intent.getIntExtra(DataBase.key_id, -1);
 
         nameTV = (TextView) findViewById(R.id.name);
         phoneTV = (TextView) findViewById(R.id.phone);
@@ -53,15 +56,26 @@ public class AddContactActivity extends AppCompatActivity {
         genderSpinner = (Spinner) findViewById(R.id.spinGender);
         confirmBtn = (Button) findViewById(R.id.confirm);
 
+        contact = DataController.getInstance().getContactById( id );
+        int countryIndex = 0;
+
         List<String> countryNames = new ArrayList<>();
         List<String> countryCodes = new ArrayList<>();
 
         countries = DataController.getInstance().getAllCountries();
         for (int i = 0; i < countries.size(); i++)
         {
+            if ( contact.country.id == countries.get(i).id )
+                countryIndex = i;
+
             countryNames.add( countries.get(i).country_name);
             countryCodes.add( countries.get(i).code);
         }
+
+        nameTV.setText( contact.name );
+        phoneTV.setText( contact.phone );
+        emailTV.setText( contact.email );
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( this,android.R.layout.simple_spinner_item, countryNames );
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         countrySpinner.setAdapter( adapter );
@@ -87,6 +101,11 @@ public class AddContactActivity extends AppCompatActivity {
             }
 
         });
+
+        countrySpinner.setSelection( countryIndex );
+
+        String[] genders =  getResources().getStringArray( R.array.genders );
+        genderSpinner.setSelection(contact.gender.equals( genders[0] ) ? 0 : 1);
 
         confirmBtn.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -118,17 +137,17 @@ public class AddContactActivity extends AppCompatActivity {
             return;
         }
 
-       if ( !Validation.isValidEmail( emailTV.getText() ) )
-       {
-           emailTV.setError( "invalid email" );
-           return;
-       }
+        if ( !Validation.isValidEmail( emailTV.getText() ) )
+        {
+            emailTV.setError( "invalid email" );
+            return;
+        }
 
-       if ( !Validation.isValidPhone( phoneTV.getText() ) )
-       {
-           phoneTV.setError( "invalid phone" );
-           return;
-       }
+        if ( !Validation.isValidPhone( phoneTV.getText() ) )
+        {
+            phoneTV.setError( "invalid phone" );
+            return;
+        }
 
         ContactVO contact = new ContactVO();
         contact.name = nameTV.getText().toString();
@@ -137,8 +156,8 @@ public class AddContactActivity extends AppCompatActivity {
         contact.country.id = countries.get( countrySpinner.getSelectedItemPosition() ).id;
         contact.gender = genderSpinner.getSelectedItem().toString();
 
-        DataController.getInstance().addContact( contact );
-        Toast.makeText(this, "successful add contact", Toast.LENGTH_SHORT).show();
+        DataController.getInstance().updateContact( contact );
+        Toast.makeText(this, "successful update contact", Toast.LENGTH_SHORT).show();
 
         Intent returnIntent = new Intent();
         setResult( Activity.RESULT_OK,returnIntent );

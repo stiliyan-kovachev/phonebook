@@ -3,7 +3,6 @@ package com.stiliyan.phonebook.phonebook.data;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,18 @@ public class DataController {
         db.addContact( contentValues );
     }
 
+    public void updateContact( ContactVO contact ) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put( DataBase.key_name, contact.name );
+        contentValues.put( DataBase.key_email, contact.email );
+        contentValues.put( DataBase.key_country_id, contact.country.id );
+        contentValues.put( DataBase.key_phone, contact.phone );
+        contentValues.put( DataBase.key_gender, contact.gender );
+
+        db.updateContact( contact.id, contentValues );
+    }
+
     public void addCountry( CountryVO country ) {
         ContentValues contentValues = new ContentValues();
         contentValues.put( DataBase.key_country, country.country_name );
@@ -61,11 +72,7 @@ public class DataController {
                 ContactVO model = new ContactVO();
                 model.id =  ( c.getInt(c.getColumnIndex( DataBase.key_contact_id ) ) );
                 model.name = ( c.getString(c.getColumnIndex( DataBase.key_name ) ) );
-                /*model.country = ( c.getString(c.getColumnIndex( DataBase.key_country ) ) );
-                model.email = ( c.getString(c.getColumnIndex( DataBase.key_email ) ) );
-                model.code = ( c.getString(c.getColumnIndex( DataBase.key_code ) ) );*/
                 model.phone = ( c.getString(c.getColumnIndex( DataBase.key_phone ) ) );
-//                model.gender = ( c.getString(c.getColumnIndex( DataBase.key_gender ) ) );
 
                 Cursor cr = db.getCountryById( model.country.id );
                 if ( cr.moveToFirst() ) {

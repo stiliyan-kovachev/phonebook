@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/addContact"
-            android:text="add new number"
+            android:text="@string/addNewNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

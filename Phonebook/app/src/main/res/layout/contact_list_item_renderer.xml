@@ -8,11 +8,13 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contact name" />
+        android:text="@string/name"
+        android:textSize="23dp"/>
 
     <TextView
         android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="number" />
+        android:text="@string/phone"
+        android:textSize="23dp"/>
 </LinearLayout>
