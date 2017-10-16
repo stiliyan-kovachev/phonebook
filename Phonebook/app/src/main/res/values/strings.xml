@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Phonebook</string>
+    <string name="title_activity_add_contact">AddContactActivity</string>
+    <string name="title_activity_view_contact">ViewContactActivity</string>
 </resources>
