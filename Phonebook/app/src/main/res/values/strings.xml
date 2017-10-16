@@ -2,4 +2,32 @@
     <string name="app_name">Phonebook</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
     <string name="title_activity_view_contact">ViewContactActivity</string>
+
+    <string-array name="countries">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antigua and Barbuda</item>
+    </string-array>
+
+    <string-array name="country_codes">
+        <item>93</item>
+        <item>355</item>
+        <item>213</item>
+        <item>683</item>
+        <item>376</item>
+        <item>244</item>
+        <item>264</item>
+        <item>268</item>
+    </string-array>
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
 </resources>
